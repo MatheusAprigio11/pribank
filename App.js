@@ -1,9 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Routers from './routers';
+import React from 'react';
+import { StatusBar } from 'react-native';
+import { useFonts } from 'expo-font'
+import * as SplashScreen from 'expo-splash-screen';
+import { useCallback } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import Routes from './src/routes';
 
 export default function App() {
+
+  const [fontsLoaded] = useFonts({
+    regular: require('./assets/fonts/Lexend-Regular.ttf'),
+    light: require('./assets/fonts/Lexend-Light.ttf'),
+    bold: require('./assets/fonts/Lexend-Bold.ttf'),
+    medium: require('./assets/fonts/Lexend-Medium.ttf'),
+    semibold: require('./assets/fonts/Lexend-SemiBold.ttf'),
+  })
+
+
+  const onLayoutRootView = useCallback(async () => {
+
+
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded])
+
+
+  if (!fontsLoaded) {
+    console.log("aaaaaaaaaaa")
+    return null;
+  }
+
   return (
-    <Routers/>
+    <NavigationContainer>
+      <StatusBar backgroundColor="#FF364E" barStyle={"light-content"}/>
+      <Routes />
+    </NavigationContainer>
   )
 }
