@@ -36,12 +36,15 @@ const styles = StyleSheet.create({
         fontFamily: 'medium',
         color: '#FFF',
         fontSize: 21,
-        marginBottom: 6,
+        marginBottom: 4,
+        paddingTop: 10,
     },
     input:{
-        backgroundColor: '#fff',
+        backgroundColor: '#FDBCBC',
         borderRadius: 12,
         height: 40,
+        fontFamily: 'regular',
+        paddingLeft: 8
     },
     buttonOkView:{
         justifyContent: 'center',
@@ -52,13 +55,28 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:"center",
         alignItems: "center",
+        gap: 30,
     },
     btnOk:{
         justifyContent: "center",
         borderRadius: 13,
         alignItems: "center",
         backgroundColor: '#FDBCBC',
-        width: 90,
+        width: 130,
+        height: 36,
+        marginTop: 15,
+        marginBottom:40,
+        
+    },
+    btnsLogin:{
+        justifyContent: "center",
+        borderRadius: 13,
+        alignItems: "center",
+        backgroundColor: '#FDBCBC',
+        width: 140,
+        height: 36,
+        marginTop: 10,
+        
     },
 })
 

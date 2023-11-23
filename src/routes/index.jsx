@@ -1,24 +1,25 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
 import Login from "../pages/login";
-import CadastrarPJ from "../pages/cadastrarPj";
+import Home from "../pages/Home";
+
 
 const Stack = createNativeStackNavigator();
 
 export default function Routes(){
     return(
-        <Stack.Navigator>
-           {/* <Stack.Screen 
-                name="CadastrarPj"
-                component={CadastrarPJ}
-                options={{ headerShown: false }}
-            /> */}
-            <Stack.Screen 
-                name="Login"
-                component={Login}
-                options={{ headerShown: false }}
-            />
+            <Stack.Navigator initialRouteName="Login">
+                <Stack.Screen 
+                    name="Login"
+                    component={Login}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen 
+                    name="TelaHome"
+                    component={Home}
+                    options={{ headerShown: false }}
+                />
 
-        </Stack.Navigator>
+            </Stack.Navigator>
+
     )
 }
