@@ -1,14 +1,55 @@
-import { View, Text, Image } from 'react-native'
-import React from 'react'
+import { View, Text, Image, Alert, ActivityIndicator } from 'react-native'
+import React, { useEffect, useState } from 'react'
 import styles from './styles'
 import { MaterialCommunityIcons } from "react-native-vector-icons";
-
+import { useSelector } from 'react-redux';
 import ButtonHome from '../../components/ButtonsHome/ButtonHome';
 import AtividadeCard from '../../components/AtividadeCard/AtividadeCard';
+import instance from '../../../services/axiosInstance';
+
+
 
 const Home = () => {
+
+  const [data, setData] = useState({})
+  const [clienteData, setClienteData] = useState({})
+  const [loading, setLoading] = useState(true)
+
+  const { token } = useSelector(state => {
+    return state.userReducer
+  })
+
+
+  const fetchData = async () => {
+    try {
+      const cliente = await instance.get('contas/', 
+        {
+          headers: {
+            'Authorization': `Token ${token}`
+          }
+        }
+    )
+    setData(cliente.data)
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
+    
+    console.log(cliente.data)
+    } catch (error) {
+      console.log(error.response.data)
+
+    }
+
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
   return (
-    <View style={styles.container}>
+
+    !loading ? (
+      <View style={styles.container}>
       <View style={styles.infoUsuario}>
         <View style={styles.iconImage}>
           <MaterialCommunityIcons
@@ -18,12 +59,12 @@ const Home = () => {
             size={27}
           />
           <Image
-            source={require('../../assets/profile.jpg')}
+            source={{uri: data[0].id_cliente.foto}}
             style={styles.avatar}
           />
         </View>
         <View style={styles.nomeOlho}>
-          <Text style={{ fontSize: 22, fontFamily: 'semibold' }}>Olá, Fulano Prijas</Text>
+          <Text style={{ fontSize: 22, fontFamily: 'semibold' }}>Olá, {data[0].id_cliente.first_name}</Text>
           <MaterialCommunityIcons
             name='eye-outline'
             color='black'
@@ -34,7 +75,7 @@ const Home = () => {
         <View style={styles.saldoConta}>
           <View>
             <Text style={{ fontFamily: 'semibold', fontSize: 20 }}>Conta</Text>
-            <Text style={{ fontFamily: 'semibold', fontSize: 20 }}>R$1000,00</Text>
+            <Text style={{ fontFamily: 'semibold', fontSize: 20 }}>R${data[0].saldo}</Text>
           </View>
           <View>
             <MaterialCommunityIcons
@@ -78,6 +119,13 @@ const Home = () => {
 
 
     </View>
+    ) : (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+
+        <ActivityIndicator size={30} color={'#000'}/>
+      </View>
+    )
+  
   )
 }
 

@@ -5,6 +5,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useCallback } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import Routes from './src/routes';
+import { Provider } from 'react-redux'
+import { Store } from './services/reducers/store';
 
 export default function App() {
 
@@ -31,9 +33,11 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <StatusBar backgroundColor="#FF364E" barStyle={"light-content"}/>
-      <Routes />
-    </NavigationContainer>
+    <Provider store={Store}>
+      <NavigationContainer>
+        <StatusBar backgroundColor="#FF364E" barStyle={"light-content"}/>
+        <Routes />
+      </NavigationContainer>
+    </Provider>
   )
 }

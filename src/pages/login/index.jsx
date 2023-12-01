@@ -3,6 +3,9 @@ import { View, Text, Image, TouchableOpacity, TextInput } from 'react-native'
 import { useState } from 'react';
 import styles from './styles'
 import { useNavigation } from '@react-navigation/native';
+import instance from '../../../services/axiosInstance';
+import { useDispatch } from 'react-redux'
+import { setToken } from '../../../services/reducers/actions';
 
 const Login = () => {
 
@@ -10,28 +13,43 @@ const Login = () => {
     const [textCPF, setTextCPF] = useState('Insira aqui seu CPF');
     const [password, setPassword] = useState('Senha');
 
+    const dispatch = useDispatch()
+
+    const login = async() => {
+      try {
+        const user = await instance.post('authtoken/login/', {
+          cpf: textCPF,
+          password: password
+        })   
+        console.log(user.data.auth_token)     
+        dispatch(setToken(user.data.auth_token))
+        navigation.navigate('TelaHome')
+      } catch (error) {
+        console.error(error.response.data)
+      }
+    }
 
     const handleFocusCPF = () => {
         if (textCPF === 'Insira aqui seu CPF') {
-          onChangeTextCPF('');
+          setTextCPF('');
         }
       };
     
       const handleBlurCPF = () => {
         if (textCPF === '') {
-          onChangeTextCPF('Insira aqui seu CPF');
+          setTextCPF('Insira aqui seu CPF');
         }
       };
     
       const handleFocusPassword = () => {
         if (password === 'Senha') {
-          onChangePassword('');
+          setPassword('');
         }
       };
     
       const handleBlurPassword = () => {
         if (password === '') {
-          onChangePassword('Senha');
+          setPassword('Senha');
         }
       };
 
@@ -68,7 +86,7 @@ const Login = () => {
                     />
                 </View>
                 <View style={styles.buttonOkView}>
-                    <TouchableOpacity style={styles.btnOk} onPress={() => navigation.navigate('TelaHome')}>
+                    <TouchableOpacity style={styles.btnOk} onPress={login}>
                         <Text style={{ fontFamily: 'semibold', fontSize:20 }}>Ok</Text>
                     </TouchableOpacity>
                 </View>
