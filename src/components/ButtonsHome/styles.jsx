@@ -3,11 +3,11 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     btnsHome: {
-        backgroundColor: '#F2F2F2',
         width: 172,
         height: 94,
         justifyContent: 'center',
         borderRadius: 10,
+        backgroundColor: '#E2E2E2',
     },
     context: {
         flexDirection: 'row',

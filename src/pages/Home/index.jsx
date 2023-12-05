@@ -6,13 +6,14 @@ import { useSelector } from 'react-redux';
 import ButtonHome from '../../components/ButtonsHome/ButtonHome';
 import AtividadeCard from '../../components/AtividadeCard/AtividadeCard';
 import instance from '../../../services/axiosInstance';
+import { useNavigation } from '@react-navigation/native';
+
 
 
 
 const Home = () => {
-
+  const navigation = useNavigation();
   const [data, setData] = useState({})
-  const [clienteData, setClienteData] = useState({})
   const [loading, setLoading] = useState(true)
 
   const { token } = useSelector(state => {
@@ -92,6 +93,7 @@ const Home = () => {
           <ButtonHome
             iconeName='attach-money'
             texto='Área PIX'
+            onPress={() => navigation.navigate('AreaPix')}
           />
           <ButtonHome
             iconeName='compare-arrows'

@@ -8,7 +8,7 @@ export default function ButtonHome(props) {
 
     console.log(props)
   return (
-        <TouchableOpacity style={styles.btnsHome}>
+        <TouchableOpacity style={styles.btnsHome} onPress={props.onPress}>
             <View style={styles.context}>
                 <View style={styles.iconeView}>
                     <MaterialIcons name={props.iconeName}
