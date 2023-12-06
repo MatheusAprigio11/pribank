@@ -69,11 +69,12 @@ const ValorTransf = () => {
   return (
     !loading ? (
       <View>
-        <View>
-          <Text>Qual o Valor da Transferência?</Text>
+        <View style={styles.viewTxt}>
+          <Text style={styles.mainTxt}>Qual o Valor da</Text> 
+          <Text style={styles.mainTxt}>Transferência?</Text>
         </View>
         <View>
-          <Text>Saldo disponível R${data[0].saldo}</Text>
+          <Text style={styles.saldoTxt}>Saldo disponível R${data[0].saldo}</Text>
         </View>
         <View>
           <TextInput
@@ -84,18 +85,18 @@ const ValorTransf = () => {
             value={valorTransf}
           />
         </View>
-        <TouchableOpacity style={styles.btnOk} onPress={() => navigation.navigate('ChaveTransf', valorTransf)}>
+        <TouchableOpacity style={styles.btnNext} onPress={() => navigation.navigate('ChaveTransf', valorTransf)}>
           <MaterialCommunityIcons
             name='chevron-right'
             color='black'
-            size={30}
+            size={40}
           />
         </TouchableOpacity>
       </View>
     ) : (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 
-        <ActivityIndicator size={30} color={'#000'} />
+        <ActivityIndicator size={30} color={'#ff364e'} />
       </View>
     )
   )

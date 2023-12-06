@@ -4,7 +4,7 @@ import Home from "../pages/Home";
 import AreaPix from "../pages/areaPix";
 import ValorTransf from "../pages/ValorTransf";
 import ChaveTransf from "../pages/chaveTransf";
-
+import ConfirmarPix from "../pages/confimarTransf";
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +34,11 @@ export default function Routes(){
                 <Stack.Screen 
                     name="ChaveTransf"
                     component={ChaveTransf}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen 
+                    name="ConfirmarPix"
+                    component={ConfirmarPix}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>
