@@ -66,6 +66,7 @@ const ValorTransf = () => {
     }
   }
 
+  
   return (
     !loading ? (
       <View>

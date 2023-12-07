@@ -4,9 +4,10 @@ import React from 'react'
 import styles from './styles'
 import instance from '../../../services/axiosInstance';
 import { useSelector } from 'react-redux';
+import { MaterialCommunityIcons } from "react-native-vector-icons";
 
 
-const ConfirmarPix = ({ route }) => {
+const TransfConfirmada = ({ route }) => {
 
     const [loading, setLoading] = useState(true)
     const [data, setData] = useState({})
@@ -77,12 +78,11 @@ const ConfirmarPix = ({ route }) => {
                     <Text style={styles.chaveTxtPf}>CPF</Text>
                 </View>
                 <View style={styles.btnConfirmarView}>
-                    <TouchableOpacity
-                        style={styles.btnConfirmar}
-                        onPress={() => fazerTransf()}
-                    >
-                        <Text style={styles.btnTxt}>CONFIRMAR</Text>
-                    </TouchableOpacity>
+                  <MaterialCommunityIcons
+                    name='checkbox-marked-circle-outline'
+                    color='black'
+                    size={25}
+                  />
                 </View>
 
             </View>
@@ -95,4 +95,4 @@ const ConfirmarPix = ({ route }) => {
         )
 }
 
-export default ConfirmarPix
+export default TransfConfirmada

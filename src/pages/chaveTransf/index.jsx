@@ -10,8 +10,9 @@ const ChaveTransf = ({ route }) => {
 
   const navigation = useNavigation();
 
-  const valorTransf = route.params
+  const valorTransf = route.params || {}
   console.log(valorTransf)
+
   const [chaveTransf, setChaveTransf] = useState('CPF');
 
   const handleFocusCPF = () => {
@@ -46,7 +47,7 @@ const ChaveTransf = ({ route }) => {
           value={chaveTransf}
         />
       </View>
-      <TouchableOpacity style={styles.btnNext} onPress={() => navigation.navigate('ConfirmarPix', valorTransf)}>
+      <TouchableOpacity style={styles.btnNext} onPress={() => navigation.navigate('ConfirmarPix',  { valorTransf, chaveTransf })}>
         <MaterialCommunityIcons
           name='chevron-right'
           color='black'
