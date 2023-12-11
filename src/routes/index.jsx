@@ -6,7 +6,7 @@ import ValorTransf from "../pages/ValorTransf";
 import ChaveTransf from "../pages/chaveTransf";
 import ConfirmarPix from "../pages/confimarTransf";
 import TransfConfirmada from "../pages/transfConfirmada";
-import CadastrarCliente from "../pages/cadastrarCliente";
+import CadastrarUsuario from "../pages/cadastrarUsuario";
 
 const Stack = createNativeStackNavigator();
 
@@ -49,8 +49,8 @@ export default function Routes(){
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen 
-                    name="CadastrarCliente"
-                    component={CadastrarCliente}
+                    name="CadastrarUsuario"
+                    component={CadastrarUsuario}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>

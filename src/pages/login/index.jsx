@@ -94,7 +94,7 @@ const Login = () => {
                 <Text style={{ textAlign: 'center', color:'#fff', fontFamily:'semibold', fontSize:24 }}>Faça parte do Pribank!</Text>
                 <View style={styles.cadastramentoSession}>
                     <TouchableOpacity style={styles.btnsLogin}
-                    onPress={navigation.navigate("CadastrarCliente")}>
+                    onPress={() => navigation.navigate("CadastrarUsuario")}>
                         <Text style={{ fontFamily: 'semibold', fontSize: 16 }}>Abrir Conta</Text>
                     </TouchableOpacity>
                     
