@@ -4,6 +4,7 @@ import React from 'react'
 import styles from './styles'
 import instance from '../../../services/axiosInstance';
 import { useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
 
 const ConfirmarPix = ({ route }) => {
@@ -12,6 +13,7 @@ const ConfirmarPix = ({ route }) => {
     const [data, setData] = useState({})
 
     const { valorTransf, chaveTransf } = route.params || {}
+    const navigation = useNavigation();
 
     console.log(valorTransf)
     console.log(chaveTransf)
@@ -62,6 +64,11 @@ const ConfirmarPix = ({ route }) => {
         }
     }
 
+    const executarEMudarTela = () => {
+        fazerTransf()
+        navigation.navigate('TransConfirmada')
+    }
+
     return (
         !loading ? (
             <View>
@@ -79,7 +86,7 @@ const ConfirmarPix = ({ route }) => {
                 <View style={styles.btnConfirmarView}>
                     <TouchableOpacity
                         style={styles.btnConfirmar}
-                        onPress={() => fazerTransf()}
+                        onPress={() => executarEMudarTela()}
                     >
                         <Text style={styles.btnTxt}>CONFIRMAR</Text>
                     </TouchableOpacity>

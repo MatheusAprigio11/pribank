@@ -5,6 +5,8 @@ import AreaPix from "../pages/areaPix";
 import ValorTransf from "../pages/ValorTransf";
 import ChaveTransf from "../pages/chaveTransf";
 import ConfirmarPix from "../pages/confimarTransf";
+import TransfConfirmada from "../pages/transfConfirmada";
+import CadastrarCliente from "../pages/cadastrarCliente";
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +41,16 @@ export default function Routes(){
                 <Stack.Screen 
                     name="ConfirmarPix"
                     component={ConfirmarPix}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen 
+                    name="TransConfirmada"
+                    component={TransfConfirmada}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen 
+                    name="CadastrarCliente"
+                    component={CadastrarCliente}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>

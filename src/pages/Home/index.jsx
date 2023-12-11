@@ -9,11 +9,10 @@ import instance from '../../../services/axiosInstance';
 import { useNavigation } from '@react-navigation/native';
 
 
-
-
 const Home = () => {
   const navigation = useNavigation();
   const [data, setData] = useState({})
+  const [dataMov, setDataMov] = useState({})
   const [loading, setLoading] = useState(true)
 
   const { token } = useSelector(state => {
@@ -43,8 +42,31 @@ const Home = () => {
 
   }
 
+  const fetchDataMov = async () => {
+    try {
+      const movimentacao = await instance.get('movimentacao/',
+        {
+          headers: {
+            'Authorization': `Token ${token}`
+          }
+        }
+      )
+      setDataMov(movimentacao.data)
+      setTimeout(() => {
+        setLoading(false)
+      }, 1000)
+
+      console.log(movimentacao.data)
+    } catch (error) {
+      console.log(error.response.data)
+
+    }
+
+  }
+
   useEffect(() => {
     fetchData()
+    fetchDataMov()
   }, [])
 
   return (
@@ -116,7 +138,14 @@ const Home = () => {
           <View style={styles.atividadeRecente}>
             <Text style={{ fontSize: 17 }}>Atividades Recentes</Text>
           </View>
-          <AtividadeCard />
+          {
+            dataMov.slice(1).reverse().slice(0, 2).map((trans, index) =>(
+              <AtividadeCard key={index} 
+                tipo={trans["tipo"]}
+                valor={trans["valor"]} 
+              />
+            ))
+          }
         </View>
 
 

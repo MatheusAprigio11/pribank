@@ -4,95 +4,48 @@ import React from 'react'
 import styles from './styles'
 import instance from '../../../services/axiosInstance';
 import { useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 
 
-const TransfConfirmada = ({ route }) => {
-
-    const [loading, setLoading] = useState(true)
-    const [data, setData] = useState({})
-
-    const { valorTransf, chaveTransf } = route.params || {}
-
-    console.log(valorTransf)
-    console.log(chaveTransf)
-    const { token } = useSelector(state => {
-        return state.userReducer
-    })
+const ConfirmarPix = ({ route }) => {
 
 
-    const fetchData = async () => {
-        try {
-            const cliente = await instance.get(`clienteConta?search=${chaveTransf}`,
-                {
-                    headers: {
-                        'Authorization': `Token ${token}`
-                    }
-                }
-            )
-            setData(cliente.data)
-            setTimeout(() => {
-                setLoading(false)
-            }, 1000)
-
-            console.log(cliente.data)
-        } catch (error) {
-            console.log(error.response.data)
-
-        }
-
-    }
-
-    useEffect(() => {
-        fetchData()
-    }, [])
-
-    const fazerTransf = async () => {
-        try {
-            const responseData = await instance.post(`movimentacao/`,{
-                cpf: chaveTransf,
-                valor: valorTransf,
-                tipo: 'Pix'
-              },{
-                headers: {
-                    'Authorization': `Token ${token}`
-                }
-            })
-        } catch (error) {
-            console.error(error)
-        }
-    }
+    const navigation = useNavigation();
 
     return (
-        !loading ? (
-            <View>
-                <View style={styles.viewTxt}>
-                    <Text style={styles.mainTxt}>Transferência para:</Text>
-                    <Text style={styles.nameTxt}>{data[0].first_name} {data[0].last_name}</Text>
-                </View>
-                <View>
-                    <Text style={styles.saldoTxt}>R${valorTransf}</Text>
-                </View>
-                <View style={styles.chaveInfo}>
-                    <Text style={styles.chaveTxt}>Chave</Text>
-                    <Text style={styles.chaveTxtPf}>CPF</Text>
-                </View>
-                <View style={styles.btnConfirmarView}>
-                  <MaterialCommunityIcons
-                    name='checkbox-marked-circle-outline'
-                    color='black'
-                    size={25}
-                  />
-                </View>
-
+        <View>
+            <View style={styles.closeBtn}>
+                <TouchableOpacity
+                onPress={() => navigation.navigate('TelaHome')}
+                >
+                    <MaterialCommunityIcons
+                        name='close'
+                        color='red'
+                        style={{ paddingRight: 12, paddingTop: 15 }}
+                        size={40}
+                    />
+                </TouchableOpacity>
             </View>
-        ) : (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-
-                <ActivityIndicator size={30} color={'#000'} />
+            <View style={styles.viewTxt}>
+                <Text style={styles.mainTxt}>Transferência</Text>
+                <Text style={styles.nameTxt}>Confirmada</Text>
             </View>
-        )
-        )
+            <View style={styles.chaveInfo}>
+                <Text style={styles.chaveTxt}>Chave</Text>
+                <Text style={styles.chaveTxtPf}>CPF</Text>
+            </View>
+            <View style={styles.btnConfirmarView}>
+                <MaterialCommunityIcons
+                    name='check-circle-outline'
+                    color='red'
+                    style={{ paddingLeft: 10, paddingTop: 12 }}
+                    size={50}
+                />
+            </View>
+
+        </View>
+    )
 }
 
-export default TransfConfirmada
+export default ConfirmarPix
